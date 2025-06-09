@@ -15,6 +15,7 @@ public class ICSculminating {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        MySketch.main("icsculminating.MySketch");
     }
     
 }
