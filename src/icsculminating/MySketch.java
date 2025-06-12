@@ -15,12 +15,11 @@ import processing.core.PImage;
     
 public class MySketch extends PApplet {
     private PImage backgroundImg;
-    private PImage homePage;
-    private PImage learnButton;
-    private int learnX,learnY;
-    private PImage playButton;
+    private PImage welcomePage;
+    private PImage namePage;
     
     private int stage =0;
+    private String name= "";
     //private Car car2;
     //private boolean showInfo=false;
     //private Car carClicked;
@@ -30,68 +29,60 @@ public class MySketch extends PApplet {
     }
     public void setup(){
         backgroundImg = loadImage("images/start.png");
-        homePage = loadImage("images/home.png");
-        learnButton = loadImage("images/learnButton.png");
-        playButton = loadImage("images/playButton.png");
-        //car = new Car(this,300,100,"images/car.png",1);
-        //car2 = new Car(this,100,100,"images/car.png",2);
+        welcomePage = loadImage("images/welcomePage.png");
+        namePage = loadImage("images/namePage.png");
     }
+    
+    public void keyPressed(){
+       if (stage==1&&keyCode==ENTER){
+           stage++;
+       } else if(key!=CODED&&stage==1){
+           name+=key;
+       }
+    }
+    
     public void draw(){
+        background(255);
         if (stage==0){
             //showing the start page
-            background(backgroundImg);
+            image(backgroundImg,0,0);
         //home page
-        } else if (stage==1){
+        } if (stage==1){
+            //clear();
             //showing the home page
-            background(homePage);
+            image(welcomePage,0,0);
             //showing the buttons
-            learnX = 270;
-            learnY=420;
-            this.image(learnButton,270,420);
-            this.image(playButton,270,500);
         
         //learning page
-        } else if (stage==2){
-            background(0);
-            System.out.print("Learn");
+        } if (stage==2){
+            //clear();
+            image(namePage,0,0);
         }
-        
-        //car.draw();
-//        if (keyPressed){
-//            if (keyCode==LEFT){
-//                car.move(-5,0);
-//            } else if (keyCode==RIGHT){
-//                car.move(5,0);
-//            } else if (keyCode ==UP){
-//                car.move(0,-5);
-//            } else if (keyCode==DOWN){
-//                car.move(0,5);
-//            }
-//        }
-//        car2.draw();
-//        if(showInfo){
-//            carClicked.displayInfo(this);
-//        }
+        if (keyPressed){
+            if (keyCode==ENTER){
+                stage++;
+                System.out.println("Next stage");
+            
+        }
+    }
     }
     public boolean isClicked(int mouseX, int mouseY, PImage image, int x, int y){
-        //if (image!=null){
-           int centerX=x+(image.pixelWidth/2);
-        
-           int centerY= y+(image.pixelHeight/2);
-           float d =PApplet.dist(mouseX,mouseY, centerX,centerY);
-           float r = image.pixelWidth/2;
-           System.out.println("Raidus: "+r+" Distance: "+d);
-           return d<r;
+        if (image != null) {
+            int imageWidth = image.width;
+            int imageHeight = image.height;
+
+            // Check if the mouse is within the rectangular bounds
+            return mouseX >= x && mouseX <= x + imageWidth && mouseY >= y && mouseY <= y + imageHeight;
+        }
+        return false; // Return false if the image is null
+
     }
     
     public void mousePressed(){
         //if start screen is clicked, move to home screen 
-        if(isClicked(mouseX,mouseY,backgroundImg,350,350)){
+        if(isClicked(mouseX,mouseY,backgroundImg,0,0)){
             stage=1;
-        } else if (isClicked(mouseX,mouseY,learnButton,learnX,learnY)){
-            //learning page
-            stage =2;
-        }
     }
+}
 }
 
