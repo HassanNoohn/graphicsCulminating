@@ -9,10 +9,18 @@ package icsculminating;
  *
  * @author 342392941
  */
+import processing.core.PApplet;
+import processing.core.PImage;
 public class Rating {
     //setting my attributes
-    private int rate;
+    private int rate=0;
+    private PApplet app;
     
+    private PImage star1;
+    private PImage star2;
+    private PImage star3;
+    private PImage star4;
+    private PImage star5;
     //making constructor
     public Rating(int rate){
         this.rate = rate;
